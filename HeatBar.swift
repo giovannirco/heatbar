@@ -310,8 +310,9 @@ final class HeatModel: ObservableObject {
                 idlePower = reading
             }
             // With a cap set, come up low and climb to it instead of overshooting.
-            scale = capOn && canMeasurePower ? 0.3 : 1
-            holdoff = 3
+            scale = capOn && canMeasurePower ? 0.15 : 1
+            // Wait out the reading's lag before the first step up.
+            holdoff = 5
             capBelowIdle = false
         }
         self[keyPath: path(kind)].duty = channel(kind).target / 100

@@ -5,14 +5,14 @@ Menu bar switch that puts the Mac it is running on under CPU and GPU load, and t
 The icon is a flame. Clicking it opens a panel with three controls:
 
 - **CPU** and **GPU** each have their own switch, so you can load one, the other, or both. The CPU load spins every logical core. The GPU load is a Metal matrix multiply.
-- Each has a **target** from 10% to 100%. HeatBar reads the Mac's CPU load and the GPU's "Device Utilization %" once a second and adjusts its own load until the reading matches the target. Other software counts toward the reading, so a target of 60% means the Mac sits at 60%, not HeatBar's share of it.
+- Each has a **target** from 10% to 100%. HeatBar reads the Mac's CPU load and the GPU's "Device Utilization %" once a second and adjusts its own load until the reading matches the target. Other software counts toward the reading, so a target of 60% means the Mac sits at 60%, not HeatBar's share of it. It also means a CPU target below what the Mac is already doing cannot be reached. The GPU reading is steady at 60% and above. Below about 50% it jumps between zero and short spikes, and the load swings with it.
 - **Power cap** holds the whole Mac under a wattage you set, 20 W to 200 W. With the cap on, the load starts low and climbs until total system power reaches the cap, then stays there. While the cap is holding the load back, the utilization targets are not reached.
 
 The panel shows total system power and the measured CPU and GPU load. Targets and the cap are remembered between launches. Quitting the app stops the load. **Launch at login** is off until you turn it on.
 
 macOS 14 or later, with a Metal GPU. The load is meant to make the machine hot, so the fans will spin up if the system decides they should. HeatBar does not change fan settings.
 
-The power cap needs the SMC key `PSTR`, which Apple silicon Macs report without root. On a Mac that does not report it, the cap is disabled. The reading trails the load by two to three seconds, so the cap takes about 15 seconds to settle and power can pass it briefly by a few watts.
+The power cap needs the SMC key `PSTR`, which Apple silicon Macs report without root. On a Mac that does not report it, the cap is disabled. The reading trails the load by two to three seconds, so the cap takes about 15 seconds to settle. Once settled, power moves around the cap by about 5 W either way.
 
 ## Build
 
